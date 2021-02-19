@@ -15,33 +15,33 @@ def inner_product(a, r) :
     return scalar_product / a_norm
 
 def OMP(y, A, s, print_stuff=False) :
-    d = np.shape(A)[1]
+    d = np.shape(A)[0]
     support = []
     residual = cp.deepcopy(y)
     coefs = 0
     for k in range(s) :
         best_i = 0
         best_inner_product = 0
-        for i in range(np.shape(A)[0]) :
+        for i in range(np.shape(A)[1]) :
             if i not in support :
-                i_inner_product = inner_product(A[i:,], residual)
+                i_inner_product = inner_product(A[:,i], residual)
                 if i_inner_product > best_inner_product :
                     best_i = i
                     best_inner_product = i_inner_product
         support.append(best_i)
-        A_s = A[support,:]
+        A_s = A[:,support]
         invertible = np.dot(A_s, np.transpose(A_s))
         invertible += .01 * np.eye(invertible.shape[0])
         transformation = np.dot(np.linalg.inv(invertible), A_s)
         #print(np.shape(transformation))
-        coefs = np.dot(transformation, y)
-        residual = y - np.dot(np.transpose(A_s), coefs)
-    x_s = np.zeros(np.shape(A)[0])
+        coefs = np.dot(np.transpose(transformation), y)
+        residual = y - np.dot(A_s, coefs)
+    x_s = np.zeros(np.shape(A)[1])
     x_s[support] = coefs
     if print_stuff :
         print(support, coefs)
-    return x_s
-'''
+    return np.transpose(x_s)
+
 A = np.zeros((10,20))
 for i in range(np.shape(A)[0]) :
     for j in range(np.shape(A)[1]) :
@@ -50,20 +50,20 @@ for i in range(np.shape(A)[0]) :
 print(A)
 
 #y = np.array([rd.randint(0, 100) for i in range(20)])
-x = np.zeros(10)
-x[3] = .5
-x[5] = .2
-x[9] = .4
-y = np.dot(np.transpose(A), x)
+x = np.zeros(20)
+x[0] = .5
+x[1] = .2
+x[2] = .4
+y = np.dot(A, np.transpose(x))
 print(f'x = {x}')
 print(f'y = {y}')
 
 x_s = OMP(y, A, 3)
 print(f'x_s = {x_s}')
 
-print(np.dot(np.transpose(A), x_s))
+print(np.dot(A, x_s))
 
-print(np.dot(np.transpose(A), x_s) - y)
+print(np.dot(A, x_s) - y)
 '''
 def initialize_dic(d, K) :
     D = np.zeros((K, d))
