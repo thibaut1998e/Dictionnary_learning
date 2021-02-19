@@ -41,7 +41,7 @@ def OMP(y, A, s, print_stuff=False) :
     if print_stuff :
         print(support, coefs)
     return np.transpose(x_s)
-
+'''
 A = np.zeros((10,20))
 for i in range(np.shape(A)[0]) :
     for j in range(np.shape(A)[1]) :
@@ -113,14 +113,14 @@ def kSVD(Y, K, s, nb_iter) :
     for i in range(N) :
         X[:,i] = OMP(Y[:,i], D, s)
     return D, X
-
+'''
 Y = np.random.rand(20,20)
 
 D, X = kSVD(Y, 8, 3, 20)
     
 for i in range(10) :
     print(np.dot(X[:,i], D) - Y[:,i])
-    
+'''
     
     
     
