@@ -1,7 +1,6 @@
-# dictionnary_learning
-[Presentation link](https://docs.google.com/presentation/d/1ocrZnrfmXJ5VwVtgdtoziGQrNzY5xx9TEyR_2ZuxOQE/edit#slide=id.p)
-
 # Dictionary Learning with OMP and k-SVD
+
+[Presentation link](https://docs.google.com/presentation/d/1ocrZnrfmXJ5VwVtgdtoziGQrNzY5xx9TEyR_2ZuxOQE/edit#slide=id.p)
 
 ## Project Overview
 
